@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+  <rect width="48" height="48" rx="12" fill="#0B120E"/>
+  <rect width="48" height="48" rx="12" fill="url(#bg_grad)" opacity="0.5"/>
+  <!-- Leaf shape -->
+  <path d="M24 8C24 8 36 12 36 24C36 30 31 35 25 36C25 36 20 28 20 22C20 16 24 8 24 8Z"
+        fill="#10B981" opacity="0.9"/>
+  <path d="M24 8C24 8 14 14 14 24C14 30 18 35 23 36"
+        fill="#059669" opacity="0.7"/>
+  <!-- Stem -->
+  <line x1="24" y1="36" x2="18" y2="42" stroke="#34D399" stroke-width="2" stroke-linecap="round"/>
+  <defs>
+    <linearGradient id="bg_grad" x1="0" y1="0" x2="48" y2="48">
+      <stop offset="0%" stop-color="#10B981" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#059669" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+</svg>
