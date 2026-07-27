@@ -27,13 +27,19 @@ export default function OnboardingModal({ settings, onComplete }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+      style={{
+        paddingTop: 'calc(env(safe-area-inset-top, 0px) + 12px)',
+        paddingBottom: 'calc(env(safe-area-inset-bottom, 0px) + 12px)',
+      }}
+    >
       {/* Backdrop */}
       <div className="fixed inset-0 bg-black/75 backdrop-blur-md animate-fade-in" />
 
       {/* Modal Card */}
       <div
-        className="relative w-full max-w-lg rounded-3xl p-6 sm:p-7 shadow-2xl animate-fade-in z-10 glass-card"
+        className="relative w-full max-w-lg rounded-3xl p-6 sm:p-7 shadow-2xl animate-fade-in z-10 glass-card max-h-[85vh] overflow-y-auto"
         style={{
           background: 'var(--card-bg)',
           border: '1.5px solid var(--card-border)',

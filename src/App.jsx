@@ -76,7 +76,8 @@ function Header({ monthLabel, userName, onOpenStatement }) {
   const greeting = `${icon} ${salutation}${nameStr}!`;
 
   return (
-    <header className="sticky top-0 z-50 px-4 py-3" style={{
+    <header className="sticky top-0 z-40 px-4 pb-3" style={{
+      paddingTop: 'calc(env(safe-area-inset-top, 0px) + 12px)',
       background: 'var(--header-bg)',
       backdropFilter: 'blur(16px)',
       borderBottom: '1.5px solid var(--card-border)',
@@ -181,7 +182,8 @@ function WelcomeBanner({ userName }) {
 
 function TabBar({ activeTab, onTabChange, settings }) {
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 px-4 pb-safe" style={{
+    <div className="fixed bottom-0 left-0 right-0 z-40 px-4" style={{
+      paddingBottom: 'calc(env(safe-area-inset-bottom, 0px) + 8px)',
       background: 'var(--header-bg)',
       backdropFilter: 'blur(20px)',
       borderTop: '1.5px solid var(--card-border)',
