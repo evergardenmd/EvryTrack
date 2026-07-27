@@ -405,7 +405,7 @@ export default function SettingsView({ settings, onUpdateSettings, onExportBacku
                     borderColor: job.status === 'active' ? 'color-mix(in srgb, var(--accent1) 40%, transparent)' : 'var(--card-border)',
                   }}
                 >
-                  <div className="flex items-center justify-between">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                     <div className="flex items-center gap-2.5">
                       <span className="text-xl">{job.status === 'active' ? '🏢' : '⏸'}</span>
                       <div>
@@ -423,16 +423,17 @@ export default function SettingsView({ settings, onUpdateSettings, onExportBacku
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 pt-2 sm:pt-0 border-t sm:border-t-0" style={{ borderColor: 'var(--card-border)' }}>
                       {/* Active / Deactivated Toggle Switch */}
                       <button
                         type="button"
                         onClick={() => handleToggleJobStatus(job.id)}
-                        className={`px-3 py-1.5 rounded-xl text-[11px] font-bold border transition-all cursor-pointer shadow-sm ${
-                          job.status === 'active'
-                            ? 'bg-amber-500/15 text-amber-700 dark:text-amber-300 border-amber-500/40 hover:bg-amber-500/25'
-                            : 'bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border-emerald-500/40 hover:bg-emerald-500/25'
-                        }`}
+                        className="px-3 py-1.5 rounded-xl text-[11px] font-bold border transition-all cursor-pointer shadow-sm"
+                        style={{
+                          background: job.status === 'active' ? 'color-mix(in srgb, #f59e0b 15%, transparent)' : 'color-mix(in srgb, var(--accent1) 15%, transparent)',
+                          color: job.status === 'active' ? '#d97706' : 'var(--accent1)',
+                          borderColor: job.status === 'active' ? 'color-mix(in srgb, #f59e0b 40%, transparent)' : 'var(--accent1)',
+                        }}
                       >
                         {job.status === 'active' ? 'Pause / Deactivate' : 'Re-Activate 🟢'}
                       </button>
@@ -455,7 +456,12 @@ export default function SettingsView({ settings, onUpdateSettings, onExportBacku
                       <button
                         type="button"
                         onClick={() => handleOpenDeleteJob(job)}
-                        className="px-2.5 py-1.5 rounded-xl text-[11px] font-bold bg-rose-500/15 text-rose-700 dark:text-rose-400 border border-rose-500/40 hover:bg-rose-500/25 cursor-pointer shadow-sm"
+                        className="px-2.5 py-1.5 rounded-xl text-[11px] font-bold border cursor-pointer shadow-sm"
+                        style={{
+                          background: 'color-mix(in srgb, #f43f5e 15%, transparent)',
+                          color: '#e11d48',
+                          borderColor: 'color-mix(in srgb, #f43f5e 35%, transparent)',
+                        }}
                         title="Delete options"
                       >
                         🗑
@@ -487,17 +493,21 @@ export default function SettingsView({ settings, onUpdateSettings, onExportBacku
                 key={plat.id}
                 type="button"
                 onClick={() => handleTogglePlatform(plat.id)}
-                className={`p-3 rounded-2xl border text-left flex items-center justify-between transition-all cursor-pointer select-none ${
-                  plat.active
-                    ? 'bg-emerald-500/15 border-emerald-500/40 text-emerald-400 font-bold shadow-md'
-                    : 'bg-slate-900/60 border-gray-800 text-gray-400 opacity-60'
-                }`}
+                className="p-3 rounded-2xl border text-left flex items-center justify-between transition-all cursor-pointer select-none"
+                style={{
+                  background: plat.active
+                    ? 'color-mix(in srgb, var(--accent1) 18%, transparent)'
+                    : 'color-mix(in srgb, var(--bg) 60%, transparent)',
+                  borderColor: plat.active ? 'var(--accent1)' : 'var(--card-border)',
+                  color: plat.active ? 'var(--accent1)' : 'var(--text-sub)',
+                  opacity: plat.active ? 1 : 0.7,
+                }}
               >
                 <div className="flex items-center gap-2">
                   <span className="text-lg">{plat.icon}</span>
-                  <span className="text-xs">{plat.name}</span>
+                  <span className="text-xs font-semibold">{plat.name}</span>
                 </div>
-                <span className="text-xs">{plat.active ? '✓' : '+'}</span>
+                <span className="text-xs font-bold">{plat.active ? '✓' : '+'}</span>
               </button>
             ))}
           </div>

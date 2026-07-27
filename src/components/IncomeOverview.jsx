@@ -729,12 +729,12 @@ export default function IncomeOverview({
                   💵
                 </div>
                 <div>
-                  <p className="font-extrabold text-xs text-emerald-400 flex items-center gap-1.5">
+                  <p className="font-extrabold text-xs flex items-center gap-1.5" style={{ color: 'var(--accent1)' }}>
                     <span>{item.title}:</span>
-                    <span className="text-white">{item.formattedDate}</span>
+                    <span style={{ color: 'var(--text-primary)' }}>{item.formattedDate}</span>
                   </p>
                   <p className="text-[11px]" style={{ color: 'var(--text-sub)' }}>
-                    Schedule: <span className="font-bold text-white capitalize">{item.payFrequency}</span> (${item.paycheckAmount.toFixed(2)} expected)
+                    Schedule: <span className="font-bold capitalize" style={{ color: 'var(--text-primary)' }}>{item.payFrequency}</span> (${item.paycheckAmount.toFixed(2)} expected)
                   </p>
                 </div>
               </div>
