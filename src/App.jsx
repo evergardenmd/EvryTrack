@@ -36,10 +36,12 @@ const GearIcon = ({ active }) => (
 );
 
 const LeafIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} className="w-6 h-6">
-    <path d="M11 20A7 7 0 0118 4a7 7 0 00-7 7" strokeLinecap="round" strokeLinejoin="round" />
-    <path d="M4 20l7-7" strokeLinecap="round" strokeLinejoin="round" />
-    <path d="M20 4l-1 7" strokeLinecap="round" strokeLinejoin="round" />
+  <svg viewBox="0 0 512 512" fill="none" className="w-6 h-6">
+    <path d="M256 72C256 72 400 136 400 272C400 352 336 416 256 424C256 424 200 328 200 248C200 168 256 72 256 72Z" fill="currentColor" />
+    <path d="M256 72C256 72 136 144 136 272C136 344 184 408 240 422C216 352 216 272 256 72Z" fill="currentColor" opacity="0.65" />
+    <path d="M256 424C256 424 256 260 352 144" stroke="#F59E0B" strokeWidth="24" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M256 312L312 248" stroke="currentColor" strokeWidth="20" strokeLinecap="round" opacity="0.9" />
+    <path d="M256 424L216 464" stroke="currentColor" strokeWidth="24" strokeLinecap="round" />
   </svg>
 );
 

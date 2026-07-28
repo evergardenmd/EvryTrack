@@ -1,4 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+import fs from 'fs';
+import path from 'path';
+
+// High Definition EvryTrack Brand Vector SVG (512x512 viewBox)
+const svgContent = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
   <!-- Background Card -->
   <rect width="512" height="512" rx="128" fill="#09120D"/>
   <rect x="8" y="8" width="496" height="496" rx="120" stroke="url(#border_grad)" stroke-width="12" opacity="0.9"/>
@@ -41,4 +45,9 @@
       <stop offset="100%" stop-color="#022C22"/>
     </linearGradient>
   </defs>
-</svg>
+</svg>`;
+
+const publicDir = path.resolve('/Users/justin-macpro/WEB APP/release/EvryTrack-Beta-Release/public');
+fs.writeFileSync(path.join(publicDir, 'favicon.svg'), svgContent);
+fs.writeFileSync(path.join(publicDir, 'icon.svg'), svgContent);
+console.log('Successfully generated high-def SVG logo!');

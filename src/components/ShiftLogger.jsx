@@ -385,7 +385,7 @@ function ShiftForm({ selectedDate, existingEntry, onSave, onDelete, settings, is
   };
 
   const totalDecimal = convertTimeToDecimal(form.activeTimeH, form.activeTimeM, form.activeTimeS);
-  const isValid = totalDecimal > 0;
+  const isValid = totalDecimal > 0 || (parseFloat(form.basePay) || 0) > 0 || (parseFloat(form.tips) || 0) > 0 || (parseFloat(form.activeMiles) || 0) > 0;
 
   const [year, month, day] = selectedDate.split('-').map(Number);
   const displayDate = new Date(year, month - 1, day).toLocaleDateString('en-US', {

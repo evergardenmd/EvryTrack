@@ -141,12 +141,29 @@ export function aggregateMonth(
   let totalMiles = 0;
 
   entries.forEach(entry => {
-    totalBase += parseFloat(entry.basePay) || 0;
-    totalTips += Math.round((parseFloat(entry.tips) || 0) * 100) / 100;
-    totalMiles += parseFloat(entry.activeMiles) || 0;
-    totalHours += (entry.activeTimeH !== undefined || entry.activeTimeM !== undefined || entry.activeTimeS !== undefined)
-      ? convertTimeToDecimal(entry.activeTimeH, entry.activeTimeM, entry.activeTimeS)
-      : parseFloat(entry.activeHours) || 0;
+    if (!entry) return;
+    const keys = typeof entry === 'object' ? Object.keys(entry).filter(k => k !== 'date' && k !== 'loggedAt') : [];
+    const hasNestedPlatform = keys.some(k => typeof entry[k] === 'object' && entry[k] !== null && (entry[k].basePay !== undefined || entry[k].activeTimeH !== undefined || entry[k].activeHours !== undefined || entry[k].tips !== undefined));
+
+    if (hasNestedPlatform) {
+      keys.forEach(platId => {
+        const platEntry = entry[platId];
+        if (!platEntry || typeof platEntry !== 'object') return;
+        totalBase += parseFloat(platEntry.basePay) || 0;
+        totalTips += Math.round((parseFloat(platEntry.tips) || 0) * 100) / 100;
+        totalMiles += parseFloat(platEntry.activeMiles) || 0;
+        totalHours += (platEntry.activeTimeH !== undefined || platEntry.activeTimeM !== undefined || platEntry.activeTimeS !== undefined)
+          ? convertTimeToDecimal(platEntry.activeTimeH, platEntry.activeTimeM, platEntry.activeTimeS)
+          : parseFloat(platEntry.activeHours) || 0;
+      });
+    } else {
+      totalBase += parseFloat(entry.basePay) || 0;
+      totalTips += Math.round((parseFloat(entry.tips) || 0) * 100) / 100;
+      totalMiles += parseFloat(entry.activeMiles) || 0;
+      totalHours += (entry.activeTimeH !== undefined || entry.activeTimeM !== undefined || entry.activeTimeS !== undefined)
+        ? convertTimeToDecimal(entry.activeTimeH, entry.activeTimeM, entry.activeTimeS)
+        : parseFloat(entry.activeHours) || 0;
+    }
   });
 
   const wageRate = (parseFloat(localMinWage) || 16.90) * 1.20;
@@ -200,7 +217,9 @@ export function calculateMultiGigDay(dayEntry, settings = {}) {
   }
 
   // Check if dayEntry is a multi-platform object (keys are platform IDs) or single shift
-  const isMulti = typeof dayEntry === 'object' && !dayEntry.date && !dayEntry.basePay && Object.keys(dayEntry).length > 0;
+  const keys = Object.keys(dayEntry).filter(k => k !== 'date' && k !== 'loggedAt');
+  const hasNestedPlatform = keys.some(k => typeof dayEntry[k] === 'object' && dayEntry[k] !== null && (dayEntry[k].basePay !== undefined || dayEntry[k].activeTimeH !== undefined || dayEntry[k].activeHours !== undefined || dayEntry[k].tips !== undefined));
+  const isMulti = hasNestedPlatform || (typeof dayEntry === 'object' && !dayEntry.basePay && keys.length > 0);
   const platformMap = isMulti ? dayEntry : { default: dayEntry };
 
   let totalBase = 0;
@@ -215,7 +234,7 @@ export function calculateMultiGigDay(dayEntry, settings = {}) {
   const platformResults = {};
 
   Object.entries(platformMap).forEach(([platformId, entry]) => {
-    if (!entry) return;
+    if (platformId === 'date' || platformId === 'loggedAt' || !entry || typeof entry !== 'object') return;
     const calc = calculateProp22({
       ...entry,
       localMinWage: settings.localMinWage,
